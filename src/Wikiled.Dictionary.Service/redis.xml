@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfRedisConfiguration>
+  <RedisConfiguration>
+    <AbortOnConnectFail>false</AbortOnConnectFail>
+    <AllowAdmin>true</AllowAdmin>
+    <ConnectRetry>0</ConnectRetry>
+    <ConnectTimeout>5000</ConnectTimeout>
+    <Endpoints>
+      <Endpoint host="192.168.0.147" port="6372" />
+    </Endpoints>
+    <KeepAlive>60</KeepAlive>
+    <PoolConnection>false</PoolConnection>
+    <ResponseTimeout>10000</ResponseTimeout>
+    <ServiceName>D</ServiceName>
+    <SyncTimeout>5000</SyncTimeout>
+    <WriteBuffer>0</WriteBuffer>
+  </RedisConfiguration>
+</ArrayOfRedisConfiguration>

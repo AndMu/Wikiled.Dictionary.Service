@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35521.163 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wikiled.Dictionary.Service", "Wikiled.Dictionary.Service\Wikiled.Dictionary.Service.csproj", "{286014AB-5582-4983-A39B-FD865B9F7127}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wikiled.Dictionary.Tests", "Wikiled.Dictionary.Tests\Wikiled.Dictionary.Tests.csproj", "{1BDE296D-66DB-4B1C-A1C7-BD59E74B9221}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wikiled.IntegrationTests", "Wikiled.Dictionary.IntegrationTests\Wikiled.IntegrationTests.csproj", "{9A247A6A-BB7D-4CD3-AB73-3A6D50E274AB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wikiled.Dictionary", "Wikiled.Dictionary\Wikiled.Dictionary.csproj", "{A87B13BC-AA4B-46F3-AFB2-C5844BBF8523}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F9A7EFCE-22CA-44B3-831C-74968127BF5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wikiled.Dictionary.Legacy", "Wikiled.Dictionary.Legacy\Wikiled.Dictionary.Legacy.csproj", "{E95140F0-1281-4145-9177-E75175E38BF9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{286014AB-5582-4983-A39B-FD865B9F7127}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{286014AB-5582-4983-A39B-FD865B9F7127}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{286014AB-5582-4983-A39B-FD865B9F7127}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{286014AB-5582-4983-A39B-FD865B9F7127}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BDE296D-66DB-4B1C-A1C7-BD59E74B9221}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BDE296D-66DB-4B1C-A1C7-BD59E74B9221}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BDE296D-66DB-4B1C-A1C7-BD59E74B9221}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BDE296D-66DB-4B1C-A1C7-BD59E74B9221}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A247A6A-BB7D-4CD3-AB73-3A6D50E274AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A247A6A-BB7D-4CD3-AB73-3A6D50E274AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A247A6A-BB7D-4CD3-AB73-3A6D50E274AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A247A6A-BB7D-4CD3-AB73-3A6D50E274AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A87B13BC-AA4B-46F3-AFB2-C5844BBF8523}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A87B13BC-AA4B-46F3-AFB2-C5844BBF8523}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A87B13BC-AA4B-46F3-AFB2-C5844BBF8523}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A87B13BC-AA4B-46F3-AFB2-C5844BBF8523}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E95140F0-1281-4145-9177-E75175E38BF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E95140F0-1281-4145-9177-E75175E38BF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E95140F0-1281-4145-9177-E75175E38BF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E95140F0-1281-4145-9177-E75175E38BF9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1BDE296D-66DB-4B1C-A1C7-BD59E74B9221} = {F9A7EFCE-22CA-44B3-831C-74968127BF5A}
+		{9A247A6A-BB7D-4CD3-AB73-3A6D50E274AB} = {F9A7EFCE-22CA-44B3-831C-74968127BF5A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {04E56573-C90C-4A18-9691-B56EC27B7C97}
+	EndGlobalSection
+EndGlobal

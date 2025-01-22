@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WikiledModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="WikiledModelStoreContainer">
+          <EntitySet Name="AllWords" EntityType="WikiledModel.Store.AllWords" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="English" EntityType="WikiledModel.Store.English" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="GoogleTranslation" EntityType="WikiledModel.Store.GoogleTranslation" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="InfoTable" EntityType="WikiledModel.Store.InfoTable" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Languages" EntityType="WikiledModel.Store.Languages" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Rating" EntityType="WikiledModel.Store.Rating" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+        </EntityContainer>
+        <EntityType Name="AllWords">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Word" Type="nvarchar" Nullable="false" MaxLength="350" />
+          <Property Name="Language" Type="nvarchar" Nullable="false" MaxLength="150" />
+          <Property Name="WordId" Type="int" />
+        </EntityType>
+        <EntityType Name="English">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="word" Type="varchar" Nullable="false" MaxLength="250" />
+          <Property Name="pronansation" Type="nvarchar" MaxLength="50" />
+          <Property Name="GoogleRating" Type="bigint" />
+        </EntityType>
+        <EntityType Name="GoogleTranslation">
+          <Key>
+            <PropertyRef Name="FromLanguage" />
+            <PropertyRef Name="ToLanguage" />
+            <PropertyRef Name="Word" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FromLanguage" Type="varchar" Nullable="false" MaxLength="150" />
+          <Property Name="ToLanguage" Type="varchar" Nullable="false" MaxLength="150" />
+          <Property Name="Word" Type="nvarchar" Nullable="false" MaxLength="150" />
+          <Property Name="Translation" Type="nvarchar" Nullable="false" MaxLength="150" />
+          <Property Name="Processed" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InfoTable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FromLanguage" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ToLanguage" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Total" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Languages">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SqlDbType" Type="bit" Nullable="false" />
+          <Property Name="LanguageType" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="IsLatin" Type="bit" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="JoinTable" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="JoinField" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Language" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="From" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="to" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Rating" Type="smallint" Nullable="false" />
+          <Property Name="FromWord" Type="nvarchar" Nullable="false" MaxLength="150" />
+          <Property Name="Translation" Type="nvarchar" Nullable="false" MaxLength="150" />
+        </EntityType>
+        <Function Name="GetWords" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Word" Type="nvarchar" Mode="In" />
+          <Parameter Name="Total" Type="smallint" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WikiledModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="WikiledModelContainer" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+          <EntitySet Name="Englishes" EntityType="WikiledModel.English" />
+          <EntitySet Name="AllWords" EntityType="WikiledModel.AllWord" />
+          <FunctionImport Name="GetWords" EntitySet="AllWords" ReturnType="Collection(WikiledModel.AllWord)">
+            <Parameter Name="Word" Mode="In" Type="String" />
+            <Parameter Name="Total" Mode="In" Type="Int16" />
+          </FunctionImport>
+          <EntitySet Name="InfoTable" EntityType="WikiledModel.InfoTable" />
+          <EntitySet Name="Rating" EntityType="WikiledModel.Rating" />
+          <EntitySet Name="GoogleTranslation" EntityType="WikiledModel.GoogleTranslation" />
+          <EntitySet Name="Languages" EntityType="WikiledModel.Languages" />
+        </EntityContainer>
+        <EntityType Name="English">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="word" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="pronansation" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int64" Name="GoogleRating" />
+        </EntityType>
+        <EntityType Name="AllWord">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Word" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Language" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="WordId" />
+        </EntityType>
+        <EntityType Name="InfoTable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="FromLanguage" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ToLanguage" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Total" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="From" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="to" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int16" Name="RatingValue" Nullable="false" />
+          <Property Type="String" Name="FromWord" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Translation" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="GoogleTranslation">
+          <Key>
+            <PropertyRef Name="FromLanguage" />
+            <PropertyRef Name="ToLanguage" />
+            <PropertyRef Name="Word" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="FromLanguage" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ToLanguage" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Word" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Translation" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="Int16" Name="Processed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Languages">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="Boolean" Name="SqlDbType" Nullable="false" />
+          <Property Type="String" Name="Language" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsLatin" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="JoinTable" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="JoinField" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LanguageType" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <Alias Key="Model" Value="WikiledModel" />
+        <Alias Key="Target" Value="WikiledModel.Store" />
+        <EntityContainerMapping CdmEntityContainer="WikiledModelContainer" StorageEntityContainer="WikiledModelStoreContainer">
+          <EntitySetMapping Name="Englishes">
+            <EntityTypeMapping TypeName="WikiledModel.English">
+              <MappingFragment StoreEntitySet="English">
+                <ScalarProperty Name="GoogleRating" ColumnName="GoogleRating" />
+                <ScalarProperty Name="pronansation" ColumnName="pronansation" />
+                <ScalarProperty Name="word" ColumnName="word" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AllWords">
+            <EntityTypeMapping TypeName="WikiledModel.AllWord">
+              <MappingFragment StoreEntitySet="AllWords">
+                <ScalarProperty Name="WordId" ColumnName="WordId" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Word" ColumnName="Word" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetWords" FunctionName="WikiledModel.Store.GetWords">
+            <ResultMapping>
+              <EntityTypeMapping TypeName="WikiledModel.AllWord">
+                <ScalarProperty Name="id" ColumnName="WordId" />
+              </EntityTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="InfoTable">
+            <EntityTypeMapping TypeName="WikiledModel.InfoTable">
+              <MappingFragment StoreEntitySet="InfoTable">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="ToLanguage" ColumnName="ToLanguage" />
+                <ScalarProperty Name="FromLanguage" ColumnName="FromLanguage" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rating">
+            <EntityTypeMapping TypeName="WikiledModel.Rating">
+              <MappingFragment StoreEntitySet="Rating">
+                <ScalarProperty Name="Translation" ColumnName="Translation" />
+                <ScalarProperty Name="FromWord" ColumnName="FromWord" />
+                <ScalarProperty Name="RatingValue" ColumnName="Rating" />
+                <ScalarProperty Name="to" ColumnName="to" />
+                <ScalarProperty Name="From" ColumnName="From" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GoogleTranslation">
+            <EntityTypeMapping TypeName="WikiledModel.GoogleTranslation">
+              <MappingFragment StoreEntitySet="GoogleTranslation">
+                <ScalarProperty Name="Processed" ColumnName="Processed" />
+                <ScalarProperty Name="Translation" ColumnName="Translation" />
+                <ScalarProperty Name="Word" ColumnName="Word" />
+                <ScalarProperty Name="ToLanguage" ColumnName="ToLanguage" />
+                <ScalarProperty Name="FromLanguage" ColumnName="FromLanguage" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="WikiledModel.Languages">
+              <MappingFragment StoreEntitySet="Languages">
+                <ScalarProperty Name="LanguageType" ColumnName="LanguageType" />
+                <ScalarProperty Name="JoinField" ColumnName="JoinField" />
+                <ScalarProperty Name="JoinTable" ColumnName="JoinTable" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IsLatin" ColumnName="IsLatin" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="SqlDbType" ColumnName="SqlDbType" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer>
+    <edmx:Connection>
+      <DesignerInfoPropertySet xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="WikiledModel" xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+        <EntityTypeShape EntityType="WikiledModel.English" Width="1.5" PointX="7.25" PointY="0.625" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="WikiledModel.AllWord" Width="1.5" PointX="1.375" PointY="4.25" Height="1.787985026041667" />
+        <EntityTypeShape EntityType="WikiledModel.InfoTable" Width="1.5" PointX="3.5" PointY="3.25" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="WikiledModel.Rating" Width="1.5" PointX="6" PointY="3.125" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="WikiledModel.GoogleTranslation" Width="1.5" PointX="3.125" PointY="0.875" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="WikiledModel.Languages" Width="1.5" PointX="5.5" PointY="5.875" Height="2.3648893229166674" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
